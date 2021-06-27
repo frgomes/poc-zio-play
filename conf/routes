@@ -1,0 +1,5 @@
+# Routes
+# ~~~~~~
+
+GET        /get/:key                        com.sky.controllers.CacheController.get(key:String)
+GET        /keys/:searchTerm                com.sky.controllers.CacheController.findKeys(searchTerm:String)
