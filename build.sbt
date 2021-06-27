@@ -1,13 +1,20 @@
+ThisBuild / organization     := "com.sky"
+ThisBuild / organizationName := "sky"
+ThisBuild / name             := "cache-rest-api"
+
+ThisBuild / scalaVersion       := "2.13.3"
+ThisBuild / crossScalaVersions := Seq("2.13.3")
+
+ThisBuild / Test / parallelExecution := false
+ThisBuild / Test / fork := true
+ThisBuild / run  / fork := true
+
 lazy val root = (project in file("."))
   .enablePlugins(PlayScala)
   .settings(
-    name := """cache-rest-api""",
-    organization := "com.sky",
-    version := "1.0",
-    scalaVersion := "2.13.4",
     libraryDependencies ++= Seq(
       guice,
-      "com.typesafe.play" %% "play-json" % "2.9.1",
+      "com.typesafe.play" %% "play-json" % "2.9.2",
       specs2 % Test
     ),
     scalacOptions ++= Seq(
