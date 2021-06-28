@@ -2,4 +2,4 @@
 # ~~~~~~
 
 GET        /get/:key                        com.sky.controllers.CacheController.get(key:String)
-GET        /keys/:searchTerm                com.sky.controllers.CacheController.findKeys(searchTerm:String)
+POST       /set/:key/:value                 com.sky.controllers.CacheController.set(key:String, value:String)

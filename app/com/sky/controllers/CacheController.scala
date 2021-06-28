@@ -11,11 +11,19 @@ import scala.concurrent.{ExecutionContext, Future}
 class CacheController @Inject()(cacheService: CacheService, cc: ControllerComponents)(implicit ec: ExecutionContext) extends AbstractController(cc) {
 
   def get(key: String) = Action.async { implicit request: Request[AnyContent] =>
-    Future.successful(NotFound(s"$key Not Found - to be implemented"))
+    cacheService.get(key)
+      .map {
+        case Some(value) => Ok(Json.toJson(value))
+        case None        => NotFound(Json.toJson("key not found: ${key}"))
+      }
   }
 
-  def findKeys(searchTerm: String) = Action.async { implicit request: Request[AnyContent] =>
-    Future.successful(NotFound(s"$searchTerm Not Found - to be implemented"))
+  def set(key: String, value: String) = Action.async { implicit request: Request[AnyContent] =>
+    cacheService.set(key, value)
+      .map {
+        case Some(value) => Ok(Json.toJson(value))
+        case None        => NotFound(Json.toJson("key not found: ${key}"))
+      }
   }
 
 }

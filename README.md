@@ -1,19 +1,24 @@
-Cache REST API
-==============
+poc-zio-play
+============
 
-The purpose of this exercise is to implement a non-blocking REST API that provides access and other operations to cached values by their key.
+THIS IS WORK IN PROGRESS
 
-The "skeleton" code, as part of the exercise, provides the bare minimum to import the required libs and Scala project, but it lacks implementation details.
+Demonstrates how [ZIO](http://zio.dev) can be integrated with [Play Framework](https://playframework.com/).
 
-The basic expected use cases are for the Cache API to expose the cache operations (HTTP methods - GET, PUT, DELETE) to manipulate and manage a caching layer.
+> Note: At the moment, we provide a [simple in-memory cache](http://github.com/frgomes/lru-cache). In future we will allow a secondary persistence storage.
 
-Note:
 
-The persistence store can be anything really (in-memory data structure, in-memory DB, external caching layer (e.g. Redis), and so on).
+# Running unit tests
 
-Unit testing should be provided to cover all implemented uses cases.
+Unit tests pass at the moment:
 
-# Running the com.sky.service
+```bash
+sbt test
+```
+
+# Running the application
+
+> Running the application is still work in progress.
 
 ```shell
 sbt run
@@ -22,16 +27,19 @@ sbt run
 Using the API:
 
 ```shell
-curl localhost:9000/get/ping | jq .
+curl -X POST localhost:9000/set/1/one | jq .
 ```
 ```json
 {
-  "value": "pong"
+  "1": "one"
 }
 ```
 
-# Running the tests
-
 ```shell
-sbt test
+curl localhost:9000/get/1 | jq .
+```
+```json
+{
+  "1": "one"
+}
 ```
